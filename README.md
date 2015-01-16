@@ -16,7 +16,12 @@ I like this project because it has tests ready and configured. It would be nice 
 
 On Database
 schema can be found in schema.txt
-For production, database is located at stardock.cs.virginia.edu/cs4720cem6at
-For tests, database is located at localhost:3306/cs4720cem6at... so you need to run wamp or something
-	For each test, database is cleared and rebuilt every time
-NOTE: schema must be exactly the same on test and production server
+There is no production database yet.
+So, for everything we need to use a local database. This can be easily created with WAMP (though this also gives you apache and php which we dont need).
+database must be located at stardock.cs.virginia.edu/facial
+
+You can generate the jooq files by utilizing the facial-jooq.xml file.
+Note: before you use it, you need to set the <directory> property for your directory system
+To generate, run this command:
+java -classpath jooq-3.5.0.jar;jooq-meta-3.5.0.jar;jooq-codegen-3.5.0.jar;mysql-connector-java-5.1.18-bin.jar;org.jooq.util.GenerationTool facial-jooq.xml
+Generate plugins with: mvn clean dependency:copy-dependencies

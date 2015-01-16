@@ -30,13 +30,13 @@ public class DBConn {
 	public Connection getConnection() {
 		return conn;
 	}
-
-	private Connection createConnection() {
+	
+	public Connection createConnection() {
 		Connection conn = null;
 
-		String userName = "cs4720cem6at";
-		String password = "kevinandcourtney";
-		String url = "jdbc:mysql://stardock.cs.virginia.edu/cs4720cem6at";
+		String userName = "root";
+		String password = "";
+		String url = "jdbc:mysql://localhost:3306/facial";
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -50,6 +50,7 @@ public class DBConn {
 
 			}
 			return null;
+
 		}
 	}
 }
