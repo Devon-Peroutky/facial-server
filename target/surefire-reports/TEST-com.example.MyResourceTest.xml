@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="1.874" errors="0" skipped="0" tests="2" name="com.example.MyResourceTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="c:\Program Files\Java\jdk1.7.0_11\jre\bin"/>
+    <property name="java.vm.version" value="23.6-b04"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="c:\Documents\facial\facial-server"/>
+    <property name="java.runtime.version" value="1.7.0_11-b21"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="c:\Program Files\Java\jdk1.7.0_11\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\student\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="classworlds.conf" value="c:/Documents/apache-maven-3.2.5/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="c:\Program Files\Java\jdk1.7.0_11\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;c:\Users\student\bin;.;C:\Program Files (x86)\Git\local\bin;C:\Program Files (x86)\Git\mingw\bin;C:\Program Files (x86)\Git\bin;c:\Windows\system32;c:\Windows;c:\Windows\System32\Wbem;c:\Windows\System32\WindowsPowerShell\v1.0\;c:\Program Files\ThinkPad\Bluetooth Software\;c:\Program Files\ThinkPad\Bluetooth Software\syswow64;c:\Program Files\Broadcom\WHL\;c:\Program Files\Broadcom\WHL\syswow64;c:\Program Files\Broadcom\WHL\SysWow64\;c:\Program Files\Broadcom\WHL\SysWow64\syswow64;c:\Program Files (x86)\Common Files\Lenovo;c:\Program Files (x86)\Common Files\Ulead Systems\MPEG;c:\SWTOOLS\ReadyApps;c:\Program Files (x86)\Intel\Services\IPT\;c:\Program Files (x86)\Lenovo\Access Connections\;c:\Program Files (x86)\Common Files\HP\Digital Imaging\bin;c:\Program Files (x86)\HP\Digital Imaging\bin\;c:\Program Files (x86)\HP\Digital Imaging\bin\Qt\Qt 4.3.3;c:\Program Files\Perforce;c:\Program Files\Java\jdk1.7.0_11\bin;c:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\Git\cmd;c:\Program Files\Microsoft\Web Platform Installer\;c:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;c:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;c:\Program Files\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files (x86)\nodejs\;c:\Program Files (x86)\QuickTime\QTSystem\;c:\Program Files (x86)\Google\google_appengine\;c:\Python27;C:\Program Files (x86)\Git\bin;c:\Python27\Scripts;c:\ant\bin;c:\Documents\apache-maven-3.2.5\bin;c:\Users\student\AppData\Roaming\npm;c:\Program Files (x86)\nodejs;."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\student"/>
+    <property name="user.timezone" value="America/New_York"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="user.name" value="Student"/>
+    <property name="java.class.path" value="c:/Documents/apache-maven-3.2.5/boot/plexus-classworlds-2.5.2.jar"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="c:\Program Files\Java\jdk1.7.0_11\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.7.0_11"/>
+    <property name="java.ext.dirs" value="c:\Program Files\Java\jdk1.7.0_11\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="c:\Program Files\Java\jdk1.7.0_11\jre\lib\resources.jar;c:\Program Files\Java\jdk1.7.0_11\jre\lib\rt.jar;c:\Program Files\Java\jdk1.7.0_11\jre\lib\sunrsasign.jar;c:\Program Files\Java\jdk1.7.0_11\jre\lib\jsse.jar;c:\Program Files\Java\jdk1.7.0_11\jre\lib\jce.jar;c:\Program Files\Java\jdk1.7.0_11\jre\lib\charsets.jar;c:\Program Files\Java\jdk1.7.0_11\jre\lib\jfr.jar;c:\Program Files\Java\jdk1.7.0_11\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="c:\Documents\apache-maven-3.2.5"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase time="1.281" classname="com.example.MyResourceTest" name="testGetIt"/>
+  <testcase time="0.593" classname="com.example.MyResourceTest" name="testMyJaxBean"/>
+</testsuite>
