@@ -50,6 +50,17 @@ public class QueryService {
 		return retVal;
 	}
 	
+	public static void createImages(String name, ArrayList<String> images) {
+		ArrayList<String> existingImages = getImages(name);
+		for (String image : images) {
+			if (!existingImages.contains(image)) {
+				create.insertInto(IMAGES, IMAGES.NAME, IMAGES.IMG)
+				.values(name, image)
+				.returning().fetchOne();
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		
 	
