@@ -43,6 +43,7 @@ public class DBConn {
 			conn = DriverManager.getConnection(url, userName, password);
 			return conn;
 		} catch (Exception e) {
+			System.err.println("Connection failed. Did you create the loca MySQL Database?");
 			e.printStackTrace();
 			try {
 				conn.close();

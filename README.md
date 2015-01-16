@@ -23,5 +23,9 @@ database must be located at stardock.cs.virginia.edu/facial
 You can generate the jooq files by utilizing the facial-jooq.xml file.
 Note: before you use it, you need to set the <directory> property for your directory system
 To generate, run this command:
-java -classpath jooq-3.5.0.jar;jooq-meta-3.5.0.jar;jooq-codegen-3.5.0.jar;mysql-connector-java-5.1.18-bin.jar;org.jooq.util.GenerationTool facial-jooq.xml
-Generate plugins with: mvn clean dependency:copy-dependencies
+Generate jar files with: mvn clean dependency:copy-dependencies
+java -classpath target/jooq-3.5.0.jar;target/jooq-meta-3.5.0.jar;target/jooq-codegen-3.5.0.jar;target/mysql-connector-java-5.1.34.jar;. org.jooq.util.GenerationTool facial-jooq.xml
+
+
+COMMON MISTAKES I'VE ENCOUNTERED
+running multiple instances will produce strange behavior... make sure you clear all programs before running

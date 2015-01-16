@@ -76,10 +76,15 @@ public class FacePlusPlusResource {
 	@GET
 	@Path("detection/detect")
 	public String detect(@QueryParam("url") String img) {
-		String urlString = apiUrl + "detection/detect" + apiKeyAndSecret
-				+ "url=" + img;
+		System.out.println("received detect request");
+//		String urlString = apiUrl + "detection/detect" + apiKeyAndSecret
+//				+ "url=" + URLEncoder.encode(img);
+		String urlString = "http://apius.faceplusplus.com/detection/detect?api_key=30b670da0c0cacf3741a7471d81324c3&api_secret=HwnpB8K-rhHzDx8dA-GyX3FhN0ahaILN&url=http%3A%2F%2Fimages.complex.com%2Fcomplex%2Fimage%2Fupload%2Ft_article_image%2Fa6d9eftuctcgyumti842.jpg";
+		System.out.println(urlString);
 		HttpURLConnection conn = makeRequest(urlString);
-		return getFullResponse(conn);
+		String response = getFullResponse(conn);
+		System.out.println("SUCCESS: " + response);
+		return response;
 			
 	}
 	
