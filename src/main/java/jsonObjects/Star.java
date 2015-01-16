@@ -25,4 +25,13 @@ public class Star {
 		this.recentWork = recentWork;
 		this.images = images;
 	}
+
+	@Override
+	public String toString() {
+		return "Star [name=" + name + ", bio=" + bio + ", twitter=" + twitter
+				+ ", website=" + website + ", recentWork=" + recentWork
+				+ ", images=" + images + "]";
+	}
+	
+	
 }

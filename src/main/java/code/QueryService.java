@@ -32,6 +32,15 @@ public class QueryService {
 		return new Star();
 	}
 	
+	public static void createStar(Star star) {
+		if (getStar(star.name).name == null) {
+			create.insertInto(STARS, STARS.NAME, STARS.BIO, STARS.TWITTER, STARS.WEBSITE, STARS.RECENT_WORK)
+			.values(star.name, star.bio, star.twitter, star.website, star.recentWork)
+			.returning().fetchOne();
+		}
+		
+	}
+	
 	public static ArrayList<String> getImages(String name) {
 		Result<Record> result = create.select().from(IMAGES).where(IMAGES.NAME.equal(name)).fetch();
 		ArrayList<String> retVal = new ArrayList<String>();
@@ -41,10 +50,10 @@ public class QueryService {
 		return retVal;
 	}
 	
-
-	
-	public static void main (String[] args) {
+	public static void main(String[] args) {
 		
+	
+		System.out.println(QueryService.getStar("Capri Anderson"));
 		
 	}
 }
