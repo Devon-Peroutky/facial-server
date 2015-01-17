@@ -90,14 +90,20 @@ public class FacePlusPlusResource {
 	@GET
 	@Path("detection/detect")
 	public Response detect(@QueryParam("url") String img) {
-		System.out.println("received detect request");
-		String urlString = apiUrl + "detection/detect" + apiKeyAndSecret
-				+ "url=" + URLEncoder.encode(img);
-		System.out.println(urlString);
-		HttpURLConnection conn = makeRequest(urlString);
-		String response = getFullResponse(conn);
-		System.out.println("SUCCESS: " + response);
-		return Response.ok().entity(response).header("Access-Control-Allow-Origin", "*").build();
+		try {
+			System.out.println("received detect request");
+			String urlString = apiUrl + "detection/detect" + apiKeyAndSecret
+					+ "url=" + URLEncoder.encode(img);
+			System.out.println(urlString);
+			HttpURLConnection conn = makeRequest(urlString);
+			String response = getFullResponse(conn);
+			System.out.println("SUCCESS: " + response);
+			return Response.ok().entity(response).header("Access-Control-Allow-Origin", "*").build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.noContent().build();
+		}
+
 			
 	}
 	
