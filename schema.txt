@@ -9,6 +9,7 @@ CREATE TABLE stars (
 CREATE TABLE images (
 	name varchar(255),
 	img varchar(255),
+	face_id varchar(255),
 	FOREIGN KEY (name) REFERENCES stars (name),
 	PRIMARY KEY (name, img)
 )ENGINE=InnoDB;

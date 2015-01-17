@@ -26,6 +26,7 @@ public class Keys {
 	// UNIQUE and PRIMARY KEY definitions
 	// -------------------------------------------------------------------------
 
+	public static final org.jooq.UniqueKey<jooq.generated.tables.records.ImagesRecord> KEY_IMAGES_PRIMARY = UniqueKeys0.KEY_IMAGES_PRIMARY;
 	public static final org.jooq.UniqueKey<jooq.generated.tables.records.StarsRecord> KEY_STARS_PRIMARY = UniqueKeys0.KEY_STARS_PRIMARY;
 
 	// -------------------------------------------------------------------------
@@ -39,6 +40,7 @@ public class Keys {
 	// -------------------------------------------------------------------------
 
 	private static class UniqueKeys0 extends org.jooq.impl.AbstractKeys {
+		public static final org.jooq.UniqueKey<jooq.generated.tables.records.ImagesRecord> KEY_IMAGES_PRIMARY = createUniqueKey(jooq.generated.tables.Images.IMAGES, jooq.generated.tables.Images.IMAGES.NAME, jooq.generated.tables.Images.IMAGES.IMG);
 		public static final org.jooq.UniqueKey<jooq.generated.tables.records.StarsRecord> KEY_STARS_PRIMARY = createUniqueKey(jooq.generated.tables.Stars.STARS, jooq.generated.tables.Stars.STARS.NAME);
 	}
 
