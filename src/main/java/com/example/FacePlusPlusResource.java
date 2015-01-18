@@ -97,7 +97,6 @@ public class FacePlusPlusResource {
 			System.out.println(urlString);
 			HttpURLConnection conn = makeRequest(urlString);
 			String response = getFullResponse(conn);
-			System.out.println("SUCCESS: " + response);
 			return Response.ok().entity(response).header("Access-Control-Allow-Origin", "*").build();
 		} catch (Exception e) {
 			e.printStackTrace();
