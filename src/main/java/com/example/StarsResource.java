@@ -17,19 +17,17 @@ import code.QueryService;
 @Produces(MediaType.APPLICATION_JSON)
 public class StarsResource {
 	@GET
-	public Response getStar(
-			@PathParam("name") String name) {
+	public Response getStar(@PathParam("name") String name) {
 		try {
-		System.out.println("received request for " + name);
-		Star star = QueryService.getStar(name);
-		ArrayList<String> images = QueryService.getImages(name);
-		star.images = images;
-		System.out.println(star);
-		return Response.ok().entity(star).header("Access-Control-Allow-Origin", "*").build();
+			System.out.println("received request for " + name);
+			Star star = QueryService.getStar(name);
+			ArrayList<String> images = QueryService.getImages(name);
+			star.images = images;
+			System.out.println(star);
+			return Response.ok().entity(star).header("Access-Control-Allow-Origin", "*").build();
 		} catch(Exception e) {
 			e.printStackTrace();
 			return Response.serverError().build();
 		}
-		
 	}
 }
