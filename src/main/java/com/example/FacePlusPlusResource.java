@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import code.QueryService;
 
@@ -16,6 +17,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.QueryParam;
+
+import jsonObjects.SearchResponse;
+import jsonObjects.SearchResponse.Candidate;
 
 import org.jooq.Record;
 import org.jooq.Result;
@@ -31,12 +35,13 @@ import static jooq.generated.Tables.STARS;
 @Path("faceplusplus/")
 @Produces(MediaType.APPLICATION_JSON)
 public class FacePlusPlusResource {
-
+	public static String[] ethnicityGroups = {"black", "white", "hispanic", "asian"};
 	public static String apiUrl = "http://apius.faceplusplus.com/";
 	public static String apiKeyAndSecret = "?api_key=30b670da0c0cacf3741a7471d81324c3&api_secret=HwnpB8K-rhHzDx8dA-GyX3FhN0ahaILN&";
 	public static String groupNameUrl = "group_name=Stars&";
 	public static String apiKey = "30b670da0c0cacf3741a7471d81324c3";
 	public static String apiSecret = "HwnpB8K-rhHzDx8dA-GyX3FhN0ahaILN";
+	public static ObjectMapper mapper = new ObjectMapper();
 
 	/**
 	 * Tries up to four times to make a request to the given url string. Keeps trying until it gets a 200 response.
@@ -114,6 +119,28 @@ public class FacePlusPlusResource {
 		HttpURLConnection conn = makeRequest(urlString);
 		String response = getFullResponse(conn);
 		return Response.ok().entity(response).header("Access-Control-Allow-Origin", "*").build();
+	}
+	
+	@GET
+	@Path("recognition/search")
+	public Response search(@QueryParam("key_face_id") String faceId) throws JsonParseException, JsonMappingException, IOException {
+		// 1. Find average match with ethnicity
+		double bestAvgMatch = 0;
+		SearchResponse bestCategory = null;
+		for (String ethnicityGroup : ethnicityGroups) {
+			String urlString = apiUrl + "" + apiKeyAndSecret + "face_set_name=" + ethnicityGroup + "&key_face_id=" + faceId + "&count=300";
+			String response = getFullResponse(makeRequest(urlString));
+			SearchResponse searchResponse = mapper.readValue(response, SearchResponse.class);
+			double avgMatch = searchResponse.getAvgMatch();
+			if (avgMatch > bestAvgMatch) {
+				bestAvgMatch = avgMatch;
+				bestCategory = searchResponse;
+			}
+		}
+		// 2. Find best matches within that ethnicity
+		
+		// 3. Return the person and best match url
+		return null;
 	}
 	
 	

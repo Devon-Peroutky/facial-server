@@ -3,7 +3,8 @@ CREATE TABLE stars (
 	bio text,
 	twitter varchar(255),
 	website varchar(255),
-	recent_work varchar(255)
+	recent_work varchar(255),
+	ethnicity varchar(30)
 )ENGINE=InnoDB;
 
 CREATE TABLE images (
