@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 import code.QueryService;
 
@@ -18,8 +19,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.QueryParam;
 
+import jsonObjects.RecognitionSearchResult;
 import jsonObjects.SearchResponse;
 import jsonObjects.SearchResponse.Candidate;
+import jsonObjects.Star;
+import jsonObjects.StarImage;
 
 import org.jooq.Record;
 import org.jooq.Result;
@@ -28,6 +32,10 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimaps;
 
 import static jooq.generated.Tables.IMAGES;
 import static jooq.generated.Tables.STARS;
@@ -138,9 +146,40 @@ public class FacePlusPlusResource {
 			}
 		}
 		// 2. Find best matches within that ethnicity
+		ListMultimap<Star, Candidate> starToCandidate = ArrayListMultimap.create();
+		for (Candidate candidate : bestCategory.candidates) {
+			starToCandidate.put(Main.faceIdToStarMap.get(candidate.face_id), candidate);
+		}
 		
-		// 3. Return the person and best match url
-		return null;
+		Star bestMatch = null;
+		double bestSimilarity = 0;
+		List<Candidate> topCandidates = null;
+		for (Star s : starToCandidate.keys()) {
+			List<Candidate> candidates = starToCandidate.get(s);
+			double total = 0;
+			for (Candidate c : candidates) {
+				total += c.similarity;
+			}
+			double average = total / candidates.size();
+			if (average > bestSimilarity) {
+				bestSimilarity = average;
+				bestMatch = s;
+			}
+		}
+		
+		// 3. Find best matching url for person
+		double topSimilarity = 0;
+		String topUrl = "";
+		for (Candidate c : topCandidates) {
+			if (c.similarity > topSimilarity) {
+				StarImage s = QueryService.getStarImage(c.face_id);
+				topSimilarity = c.similarity;
+				topUrl = s.url;
+			}
+		}
+		
+		// return {star: {star}, bestURl: {url}
+		return Response.ok().entity(new RecognitionSearchResult(bestMatch, topUrl)).build();
 	}
 	
 	

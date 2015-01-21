@@ -47,7 +47,9 @@ public class QueryService {
 		Result<Record> result = create.select().from(STARS).fetch();
 		HashSet<Star> stars = Sets.newHashSet();
 		for (Record r : result) {
-			stars.add(getStar(r));
+			Star s = getStar(r);
+			s.images = getImages(s.name);
+			stars.add(s);
 		}
 		return stars;
 	}
@@ -90,6 +92,14 @@ public class QueryService {
 			starImages.add(getStarImage(r));
 		}
 		return starImages;
+	}
+	
+	public static StarImage getStarImage(String faceId) {
+		Result<Record> records = create.select().from(IMAGES).where(IMAGES.FACE_ID.equal(faceId)).fetch();
+		if (records.size() == 1) {
+			return getStarImage(records.get(0));
+		}
+		return null;
 	}
 	
 	public static StarImage getStarImage(Record r) {
