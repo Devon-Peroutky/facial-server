@@ -60,7 +60,6 @@ public class Main {
     	for (StarImage starImage : starImages) {
     		faceIdToStarMap.put(starImage.faceId, nameToStarMap.get(starImage.name));
     	}
-    	System.out.println(faceIdToStarMap);
     }
 
     /**
