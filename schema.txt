@@ -4,7 +4,10 @@ CREATE TABLE stars (
 	twitter varchar(255),
 	website varchar(255),
 	recent_work varchar(255),
-	ethnicity varchar(30)
+	white tinyint(1),
+	black tinyint(1),
+	latina tinyint(1),
+	asian tinyint(1)
 )ENGINE=InnoDB;
 
 CREATE TABLE images (
