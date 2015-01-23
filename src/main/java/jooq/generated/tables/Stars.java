@@ -16,7 +16,7 @@ package jooq.generated.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Stars extends org.jooq.impl.TableImpl<jooq.generated.tables.records.StarsRecord> {
 
-	private static final long serialVersionUID = 1992626490;
+	private static final long serialVersionUID = -681928117;
 
 	/**
 	 * The reference instance of <code>facial.stars</code>
@@ -55,6 +55,26 @@ public class Stars extends org.jooq.impl.TableImpl<jooq.generated.tables.records
 	 * The column <code>facial.stars.recent_work</code>.
 	 */
 	public final org.jooq.TableField<jooq.generated.tables.records.StarsRecord, java.lang.String> RECENT_WORK = createField("recent_work", org.jooq.impl.SQLDataType.VARCHAR.length(255).nullable(false), this, "");
+
+	/**
+	 * The column <code>facial.stars.latina</code>.
+	 */
+	public final org.jooq.TableField<jooq.generated.tables.records.StarsRecord, java.lang.Byte> LATINA = createField("latina", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
+
+	/**
+	 * The column <code>facial.stars.white</code>.
+	 */
+	public final org.jooq.TableField<jooq.generated.tables.records.StarsRecord, java.lang.Byte> WHITE = createField("white", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
+
+	/**
+	 * The column <code>facial.stars.asian</code>.
+	 */
+	public final org.jooq.TableField<jooq.generated.tables.records.StarsRecord, java.lang.Byte> ASIAN = createField("asian", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
+
+	/**
+	 * The column <code>facial.stars.black</code>.
+	 */
+	public final org.jooq.TableField<jooq.generated.tables.records.StarsRecord, java.lang.Byte> BLACK = createField("black", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
 
 	/**
 	 * Create a <code>facial.stars</code> table reference
