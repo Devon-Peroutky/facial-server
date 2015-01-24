@@ -43,7 +43,7 @@ import static jooq.generated.Tables.STARS;
 @Path("faceplusplus/")
 @Produces(MediaType.APPLICATION_JSON)
 public class FacePlusPlusResource {
-	public static String[] ethnicityGroups = {"black", "white", "hispanic", "asian"};
+	public static String[] ethnicityGroups = {"Black", "White", "Latina", "Asian"};
 	public static String apiUrl = "http://apius.faceplusplus.com/";
 	public static String apiKeyAndSecret = "?api_key=30b670da0c0cacf3741a7471d81324c3&api_secret=HwnpB8K-rhHzDx8dA-GyX3FhN0ahaILN&";
 	public static String groupNameUrl = "group_name=Stars&";
@@ -132,54 +132,66 @@ public class FacePlusPlusResource {
 	@GET
 	@Path("recognition/search")
 	public Response search(@QueryParam("key_face_id") String faceId) throws JsonParseException, JsonMappingException, IOException {
-		// 1. Find average match with ethnicity
-		double bestAvgMatch = 0;
-		SearchResponse bestCategory = null;
-		for (String ethnicityGroup : ethnicityGroups) {
-			String urlString = apiUrl + "" + apiKeyAndSecret + "face_set_name=" + ethnicityGroup + "&key_face_id=" + faceId + "&count=300";
-			String response = getFullResponse(makeRequest(urlString));
-			SearchResponse searchResponse = mapper.readValue(response, SearchResponse.class);
-			double avgMatch = searchResponse.getAvgMatch();
-			if (avgMatch > bestAvgMatch) {
-				bestAvgMatch = avgMatch;
-				bestCategory = searchResponse;
+		System.out.println("recieved recogtion/search request");
+		try {
+			// 1. Find average match with ethnicity
+			double bestAvgMatch = 0;
+			SearchResponse bestCategory = null;
+			String bestGroup = "";
+			for (String ethnicityGroup : ethnicityGroups) {
+				String urlString = apiUrl + "recognition/search" + apiKeyAndSecret + "faceset_name=" + ethnicityGroup + "&key_face_id=" + faceId + "&count=300";
+				String response = getFullResponse(makeRequest(urlString));
+				SearchResponse searchResponse = mapper.readValue(response, SearchResponse.class);
+				double avgMatch = searchResponse.getAvgMatch();
+				System.out.println(ethnicityGroup + ": " + avgMatch);
+				if (avgMatch > bestAvgMatch) {
+					bestAvgMatch = avgMatch;
+					bestCategory = searchResponse;
+					bestGroup = ethnicityGroup;
+				}
 			}
-		}
-		// 2. Find best matches within that ethnicity
-		ListMultimap<Star, Candidate> starToCandidate = ArrayListMultimap.create();
-		for (Candidate candidate : bestCategory.candidates) {
-			starToCandidate.put(Main.faceIdToStarMap.get(candidate.face_id), candidate);
-		}
-		
-		Star bestMatch = null;
-		double bestSimilarity = 0;
-		List<Candidate> topCandidates = null;
-		for (Star s : starToCandidate.keys()) {
-			List<Candidate> candidates = starToCandidate.get(s);
-			double total = 0;
-			for (Candidate c : candidates) {
-				total += c.similarity;
+			System.out.println("Best group: " + bestGroup);
+			// 2. Find best matches within that ethnicity
+			ListMultimap<Star, Candidate> starToCandidate = ArrayListMultimap.create();
+			for (Candidate candidate : bestCategory.candidate) {
+				starToCandidate.put(Main.faceIdToStarMap.get(candidate.face_id), candidate);
 			}
-			double average = total / candidates.size();
-			if (average > bestSimilarity) {
-				bestSimilarity = average;
-				bestMatch = s;
+			
+			Star bestMatch = null;
+			double bestSimilarity = 0;
+			List<Candidate> topCandidates = null;
+			for (Star s : starToCandidate.keys()) {
+				List<Candidate> candidates = starToCandidate.get(s);
+				double total = 0;
+				for (Candidate c : candidates) {
+					total += c.similarity;
+				}
+				double average = total / candidates.size();
+				if (average > bestSimilarity) {
+					bestSimilarity = average;
+					bestMatch = s;
+					topCandidates = candidates;
+				}
 			}
-		}
-		
-		// 3. Find best matching url for person
-		double topSimilarity = 0;
-		String topUrl = "";
-		for (Candidate c : topCandidates) {
-			if (c.similarity > topSimilarity) {
-				StarImage s = QueryService.getStarImage(c.face_id);
-				topSimilarity = c.similarity;
-				topUrl = s.url;
+			
+			// 3. Find best matching url for person
+			double topSimilarity = 0;
+			String topUrl = "";
+			for (Candidate c : topCandidates) {
+				if (c.similarity > topSimilarity) {
+					StarImage s = QueryService.getStarImage(c.face_id);
+					topSimilarity = c.similarity;
+					topUrl = s.url;
+				}
 			}
-		}
 		
 		// return {star: {star}, bestURl: {url}
-		return Response.ok().entity(new RecognitionSearchResult(bestMatch, topUrl)).build();
+		return Response.ok().entity(new RecognitionSearchResult(bestMatch, topUrl)).header("Access-Control-Allow-Origin", "*").build();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return Response.noContent().build();
+		}
 	}
 	
 	
