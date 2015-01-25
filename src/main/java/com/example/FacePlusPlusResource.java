@@ -142,10 +142,10 @@ public class FacePlusPlusResource {
 				String urlString = apiUrl + "recognition/search" + apiKeyAndSecret + "faceset_name=" + ethnicityGroup + "&key_face_id=" + faceId + "&count=300";
 				String response = getFullResponse(makeRequest(urlString));
 				SearchResponse searchResponse = mapper.readValue(response, SearchResponse.class);
-				double avgMatch = searchResponse.getAvgMatch();
-				System.out.println(ethnicityGroup + ": " + avgMatch);
-				if (avgMatch > bestAvgMatch) {
-					bestAvgMatch = avgMatch;
+				double medianMatch = searchResponse.getMedianMatch();
+				System.out.println(ethnicityGroup + ": " + medianMatch);
+				if (medianMatch > bestAvgMatch) {
+					bestAvgMatch = medianMatch;
 					bestCategory = searchResponse;
 					bestGroup = ethnicityGroup;
 				}

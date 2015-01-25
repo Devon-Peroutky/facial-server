@@ -1,11 +1,13 @@
 package jsonObjects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SearchResponse {
 	public List<Candidate> candidate;
 	public String session_id;
+	private boolean isSorted = false;
 	
 	
 	public double getAvgMatch() {
@@ -18,7 +20,15 @@ public class SearchResponse {
 		return total / count;
 	}
 	
-	public static class Candidate {
+	public double getMedianMatch() {
+		if (!isSorted) {
+			Collections.sort(candidate);
+			isSorted = true;
+		}
+		return candidate.get(candidate.size() / 2).similarity;
+	}
+	
+	public static class Candidate implements Comparable<Candidate> {
 		public String face_id;
 		public double similarity;
 		public String tag;
@@ -32,6 +42,13 @@ public class SearchResponse {
 			this.similarity = similarity;
 			this.tag = tag;
 		}
+
+		@Override
+		public int compareTo(Candidate o) {
+			// TODO Auto-generated method stub
+			return (int)(this.similarity * 1000 - o.similarity*1000);
+		}
+
 			
 	}
 }
