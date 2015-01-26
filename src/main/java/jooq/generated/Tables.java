@@ -22,6 +22,11 @@ public class Tables {
 	public static final jooq.generated.tables.Images IMAGES = jooq.generated.tables.Images.IMAGES;
 
 	/**
+	 * The table facial.instagram_users
+	 */
+	public static final jooq.generated.tables.InstagramUsers INSTAGRAM_USERS = jooq.generated.tables.InstagramUsers.INSTAGRAM_USERS;
+
+	/**
 	 * The table facial.stars
 	 */
 	public static final jooq.generated.tables.Stars STARS = jooq.generated.tables.Stars.STARS;

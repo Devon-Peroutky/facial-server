@@ -2,6 +2,7 @@ package code;
 
 import static jooq.generated.Tables.IMAGES;
 import static jooq.generated.Tables.STARS;
+import static jooq.generated.Tables.INSTAGRAM_USERS;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.HashSet;
 
 import jsonObjects.Star;
 import jsonObjects.StarImage;
+import logging.InstagramUser;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -106,6 +108,16 @@ public class QueryService {
 		return new StarImage(r.getValue(IMAGES.NAME),
 				r.getValue(IMAGES.IMG),
 				r.getValue(IMAGES.FACE_ID));
+	}
+	
+	
+	// InstagramUser Section
+	public static void logInstagramUser(InstagramUser instagramUser) {
+		create.insertInto(INSTAGRAM_USERS, INSTAGRAM_USERS.USERNAME, INSTAGRAM_USERS.VISITS)
+		.values(instagramUser.username, 1)
+		.onDuplicateKeyUpdate()
+		.set(INSTAGRAM_USERS.VISITS, INSTAGRAM_USERS.VISITS.add(1))
+		.execute();
 	}
 	
 	public static void main(String[] args) {

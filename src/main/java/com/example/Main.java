@@ -38,7 +38,8 @@ public class Main {
         		"jsonObjects",
         		"jooq.generated",
         		"jooq.generated.tables",
-        		"code");
+        		"code",
+        		"logging");
         
         loadFaceIdToStarMap();
 
