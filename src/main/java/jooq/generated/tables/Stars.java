@@ -16,7 +16,7 @@ package jooq.generated.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Stars extends org.jooq.impl.TableImpl<jooq.generated.tables.records.StarsRecord> {
 
-	private static final long serialVersionUID = -681928117;
+	private static final long serialVersionUID = -935050398;
 
 	/**
 	 * The reference instance of <code>facial.stars</code>
@@ -75,6 +75,11 @@ public class Stars extends org.jooq.impl.TableImpl<jooq.generated.tables.records
 	 * The column <code>facial.stars.black</code>.
 	 */
 	public final org.jooq.TableField<jooq.generated.tables.records.StarsRecord, java.lang.Byte> BLACK = createField("black", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
+
+	/**
+	 * The column <code>facial.stars.star_id</code>.
+	 */
+	public final org.jooq.TableField<jooq.generated.tables.records.StarsRecord, java.lang.Integer> STAR_ID = createField("star_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * Create a <code>facial.stars</code> table reference

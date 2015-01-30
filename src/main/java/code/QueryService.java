@@ -18,6 +18,7 @@ import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 
@@ -37,7 +38,9 @@ public class QueryService {
 	}
 	
 	public static Star getStar(Record r) {
-		return new Star(r.getValue(STARS.NAME),
+		return new Star(
+				r.getValue(STARS.STAR_ID),
+				r.getValue(STARS.NAME),
 				r.getValue(STARS.BIO),
 				r.getValue(STARS.TWITTER),
 				r.getValue(STARS.WEBSITE),
@@ -45,9 +48,9 @@ public class QueryService {
 				null);
 	}
 	
-	public static HashSet<Star> loadStars() {
+	public static ArrayList<Star> loadStars() {
 		Result<Record> result = create.select().from(STARS).fetch();
-		HashSet<Star> stars = Sets.newHashSet();
+		ArrayList<Star> stars = Lists.newArrayList();
 		for (Record r : result) {
 			Star s = getStar(r);
 			s.images = getImages(s.name);
@@ -62,7 +65,21 @@ public class QueryService {
 			.values(star.name, star.bio, star.twitter, star.website, star.recentWork)
 			.returning().fetchOne();
 		}
-		
+	}
+	
+	/**
+	 * Cannot change name because that is the key
+	 * @param star
+	 */
+	public static void updateStar(Star star) {
+		create.update(STARS)
+			.set(STARS.BIO, star.bio)
+			.set(STARS.TWITTER, star.twitter)
+			.set(STARS.WEBSITE, star.website)
+			.set(STARS.RECENT_WORK, star.recentWork)
+			.set(STARS.STAR_ID, star.id)
+			.where(STARS.NAME.equal(star.name))
+			.execute();
 	}
 	
 	// Image Section

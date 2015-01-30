@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Star {
+	public int id;
 	public String name;
 	public String bio;
 	public String twitter;
@@ -17,7 +18,8 @@ public class Star {
 		
 	}
 
-	public Star(String name, String bio, String twitter, String website, String recentWork, ArrayList<String> images) {
+	public Star(int id, String name, String bio, String twitter, String website, String recentWork, ArrayList<String> images) {
+		this.id = id;
 		this.name = name;
 		this.bio = bio;
 		this.twitter = twitter;

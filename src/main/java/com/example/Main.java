@@ -11,6 +11,7 @@ import code.QueryService;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -39,7 +40,8 @@ public class Main {
         		"jooq.generated",
         		"jooq.generated.tables",
         		"code",
-        		"logging");
+        		"logging",
+        		"rekognition");
         
         loadFaceIdToStarMap();
 
@@ -49,7 +51,7 @@ public class Main {
     }
     
     public static void loadFaceIdToStarMap() {
-    	HashSet<Star> stars = QueryService.loadStars();
+    	ArrayList<Star> stars = QueryService.loadStars();
     	HashSet<StarImage> starImages = QueryService.loadStarImages();
     	HashMap<String, Star> nameToStarMap = Maps.newHashMap();
     	
