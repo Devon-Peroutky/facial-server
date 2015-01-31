@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class HttpRequestService {
 	public static String makeRequest(String urlString) {
@@ -32,5 +33,21 @@ public class HttpRequestService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static String readResponse(URLConnection conn) throws IOException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				conn.getInputStream()));
+	
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine + "\n");
+		}
+		in.close();
+
+		// return result
+		return response.toString();
 	}
 }

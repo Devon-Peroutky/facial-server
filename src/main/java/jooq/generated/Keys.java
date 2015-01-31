@@ -28,6 +28,7 @@ public class Keys {
 
 	public static final org.jooq.UniqueKey<jooq.generated.tables.records.ImagesRecord> KEY_IMAGES_PRIMARY = UniqueKeys0.KEY_IMAGES_PRIMARY;
 	public static final org.jooq.UniqueKey<jooq.generated.tables.records.InstagramUsersRecord> KEY_INSTAGRAM_USERS_PRIMARY = UniqueKeys0.KEY_INSTAGRAM_USERS_PRIMARY;
+	public static final org.jooq.UniqueKey<jooq.generated.tables.records.RecognitionImagesRecord> KEY_RECOGNITION_IMAGES_PRIMARY = UniqueKeys0.KEY_RECOGNITION_IMAGES_PRIMARY;
 	public static final org.jooq.UniqueKey<jooq.generated.tables.records.StarsRecord> KEY_STARS_PRIMARY = UniqueKeys0.KEY_STARS_PRIMARY;
 
 	// -------------------------------------------------------------------------
@@ -35,6 +36,7 @@ public class Keys {
 	// -------------------------------------------------------------------------
 
 	public static final org.jooq.ForeignKey<jooq.generated.tables.records.ImagesRecord, jooq.generated.tables.records.StarsRecord> IMAGES_IBFK_1 = ForeignKeys0.IMAGES_IBFK_1;
+	public static final org.jooq.ForeignKey<jooq.generated.tables.records.RecognitionImagesRecord, jooq.generated.tables.records.StarsRecord> RECOGNITION_IMAGES_IBFK_1 = ForeignKeys0.RECOGNITION_IMAGES_IBFK_1;
 
 	// -------------------------------------------------------------------------
 	// [#1459] distribute members to avoid static initialisers > 64kb
@@ -43,10 +45,12 @@ public class Keys {
 	private static class UniqueKeys0 extends org.jooq.impl.AbstractKeys {
 		public static final org.jooq.UniqueKey<jooq.generated.tables.records.ImagesRecord> KEY_IMAGES_PRIMARY = createUniqueKey(jooq.generated.tables.Images.IMAGES, jooq.generated.tables.Images.IMAGES.NAME, jooq.generated.tables.Images.IMAGES.IMG);
 		public static final org.jooq.UniqueKey<jooq.generated.tables.records.InstagramUsersRecord> KEY_INSTAGRAM_USERS_PRIMARY = createUniqueKey(jooq.generated.tables.InstagramUsers.INSTAGRAM_USERS, jooq.generated.tables.InstagramUsers.INSTAGRAM_USERS.USERNAME);
+		public static final org.jooq.UniqueKey<jooq.generated.tables.records.RecognitionImagesRecord> KEY_RECOGNITION_IMAGES_PRIMARY = createUniqueKey(jooq.generated.tables.RecognitionImages.RECOGNITION_IMAGES, jooq.generated.tables.RecognitionImages.RECOGNITION_IMAGES.NAME, jooq.generated.tables.RecognitionImages.RECOGNITION_IMAGES.URL);
 		public static final org.jooq.UniqueKey<jooq.generated.tables.records.StarsRecord> KEY_STARS_PRIMARY = createUniqueKey(jooq.generated.tables.Stars.STARS, jooq.generated.tables.Stars.STARS.NAME);
 	}
 
 	private static class ForeignKeys0 extends org.jooq.impl.AbstractKeys {
 		public static final org.jooq.ForeignKey<jooq.generated.tables.records.ImagesRecord, jooq.generated.tables.records.StarsRecord> IMAGES_IBFK_1 = createForeignKey(jooq.generated.Keys.KEY_STARS_PRIMARY, jooq.generated.tables.Images.IMAGES, jooq.generated.tables.Images.IMAGES.NAME);
+		public static final org.jooq.ForeignKey<jooq.generated.tables.records.RecognitionImagesRecord, jooq.generated.tables.records.StarsRecord> RECOGNITION_IMAGES_IBFK_1 = createForeignKey(jooq.generated.Keys.KEY_STARS_PRIMARY, jooq.generated.tables.RecognitionImages.RECOGNITION_IMAGES, jooq.generated.tables.RecognitionImages.RECOGNITION_IMAGES.NAME);
 	}
 }

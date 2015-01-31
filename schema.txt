@@ -19,6 +19,13 @@ CREATE TABLE images (
 	PRIMARY KEY (name, img)
 )ENGINE=InnoDB;
 
+CREATE TABLE recognition_images (
+	name varchar(255),
+	url varchar(255),
+	FOREIGN KEY (name) REFERENCES stars (name),
+	PRIMARY KEY (name, url)
+)ENGINE=InnoDB;
+
 CREATE TABLE instagram_users (
 	username varchar(255) PRIMARY KEY,
 	visits INT

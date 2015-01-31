@@ -19,7 +19,7 @@ public class RekognitionResource {
 	public static String apiSecret = "gJcngjDjcuTk2WG9";
 	public static String apiKeyUrl = "api_key=" + apiKey;
 	public static String apiSecretUrl = "&api_secret=" + apiSecret;
-	public static String nameSpaceUrl = "&name_space=Stars6";
+	public static String nameSpaceUrl = "&name_space=Stars7";
 	public static String apiUrl = "https://rekognition.com/func/api/?";
 	public static String baseUrl = apiUrl + apiKeyUrl + apiSecretUrl + nameSpaceUrl + "&jobs=";
 	

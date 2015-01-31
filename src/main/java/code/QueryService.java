@@ -3,6 +3,8 @@ package code;
 import static jooq.generated.Tables.IMAGES;
 import static jooq.generated.Tables.STARS;
 import static jooq.generated.Tables.INSTAGRAM_USERS;
+import static jooq.generated.Tables.RECOGNITION_IMAGES;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,6 +127,30 @@ public class QueryService {
 		return new StarImage(r.getValue(IMAGES.NAME),
 				r.getValue(IMAGES.IMG),
 				r.getValue(IMAGES.FACE_ID));
+	}
+	
+	// Recognition Image Section
+	public static void createRecognitionImages(String name, ArrayList<String> images) {
+		ArrayList<String> existingImages = getImages(name);
+		for (String image : images) {
+			if (!existingImages.contains(image)) {
+				create.insertInto(RECOGNITION_IMAGES, RECOGNITION_IMAGES.NAME, RECOGNITION_IMAGES.URL)
+				.values(name, image)
+				.onDuplicateKeyIgnore()
+				.execute();
+			}
+		}
+	}
+	
+	public static ArrayList<String> getRecognitionImages(String name) {
+		ArrayList<String> ret = Lists.newArrayList();
+		Result<Record> records = create.select().from(RECOGNITION_IMAGES)
+				.where(RECOGNITION_IMAGES.NAME.equal(name))
+				.fetch();
+		for (Record r : records) {
+			ret.add(r.getValue(RECOGNITION_IMAGES.URL));
+		}
+		return ret;
 	}
 	
 	
