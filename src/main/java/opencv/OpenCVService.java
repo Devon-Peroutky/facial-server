@@ -3,6 +3,7 @@ package opencv;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.awt.image.Raster;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -14,15 +15,9 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfRect;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.objdetect.CascadeClassifier;
-import org.opencv.imgcodecs.*;
+import org.bytedeco.javacpp.opencv_core.*;
+import org.bytedeco.javacpp.opencv_objdetect.CascadeClassifier;
+import org.bytedeco.javacpp.opencv_highgui.*;
 
 public class OpenCVService {
 
@@ -39,7 +34,7 @@ public class OpenCVService {
 	}
 	
 	public static void initialize() {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		//System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		
 		faceDetector = new CascadeClassifier(
 				"haarcascades/haarcascade_frontalface_alt.xml");
@@ -50,19 +45,21 @@ public class OpenCVService {
 	}
 
 	public static Mat getFace(Mat orig, Rect rect) {
-		Mat ret = new Mat(rect.height, rect.width, CvType.CV_8UC3);
-
-		for (int row = 0; row < rect.height; row++) {
-			for (int col = 0; col < rect.width; col++) {
-				ret.put(row, col, orig.get(rect.y + row, rect.x + col));
+		Mat ret = new Mat(rect.height(), rect.width(), org.bytedeco.javacpp.opencv_core.CV_8UC3);
+		Raster bi = orig.getBufferedImage().getData();
+		for (int row = 0; row < rect.height(); row++) {
+			for (int col = 0; col < rect.width(); col++) {
+				//ret.put(row, col, orig.get(rect.y() + row, rect.x() + col));
 			}
 		}
 		return ret;
 	}
 
 	public static Rect[] detectFaces(Mat image) {
-		MatOfRect faceDetections = new MatOfRect();
-		faceDetector.detectMultiScale(image, faceDetections);
-		return faceDetections.toArray();
+		
+		//MatOfRect faceDetections = new MatOfRect();
+		//faceDetector.detectMultiScale(image, faceDetections);
+		//return faceDetections.toArray();
+		return null;
 	}
 }

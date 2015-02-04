@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
+import org.bytedeco.javacpp.opencv_core.Mat;
+import org.bytedeco.javacpp.opencv_highgui;
 
 public class ImageService {
 	public static void writeFileFromUrl(String urlString, String dest) throws IOException {
@@ -59,6 +59,6 @@ public class ImageService {
 	
 	public static void writeFile(String path, Mat m) {
 		makeDirs(path);
-		Imgcodecs.imwrite(path, m);
+		org.bytedeco.javacpp.opencv_highgui.imwrite(path, m);
 	}
 }
