@@ -1,9 +1,12 @@
-0. git clone facial-server
+--- Amazon-Linux (YUM) ---
+0a. Install NodeJS (not Node)
+0b. Install MySQL
+1a. git clone facial-server
+1a. git clone facial
 1. Initialize MySQL database
-  a.  Install MySQL
-  b.  Start the service: mysqld if not already started
-  c.  Create database named facial
-  d.  Import 'Stars.sql' and 'Images.sql' table
+  a.  Start the service: mysqld if not already started
+  b.  Create database named facial
+  c.  Import 'Stars.sql' and 'Images.sql' table
 2. Install Maven
   sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
   sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
